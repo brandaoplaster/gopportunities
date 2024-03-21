@@ -5,13 +5,19 @@ import (
 	"github.com/brandaoplaster/gopportunities/router"
 )
 
+var (
+	logger *config.Logger
+)
+
 func main() {
 	println("Starting...")
+
+	logger = config.GetLogger("main")
 
 	erro := config.Init()
 
 	if erro != nil {
-		println("Error initializing config")
+		logger.ErrorFormat("Config initialization failed: %v", erro)
 		return
 	}
 
