@@ -4,6 +4,8 @@ go 1.19
 
 require gorm.io/gorm v1.25.8
 
+require github.com/mattn/go-sqlite3 v1.14.17 // indirect
+
 require (
 	github.com/bytedance/sonic v1.11.3 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
@@ -33,4 +35,5 @@ require (
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	gorm.io/driver/sqlite v1.5.5
 )
