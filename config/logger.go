@@ -42,3 +42,19 @@ func (logger *Logger) Warning(values ...interface{}) {
 func (logger *Logger) Error(values ...interface{}) {
 	logger.err.Println(values...)
 }
+
+func (logger *Logger) DebugFormat(format string, values ...interface{}) {
+	logger.debug.Printf(format, values...)
+}
+
+func (logger *Logger) InfoFormat(format string, values ...interface{}) {
+	logger.info.Printf(format, values...)
+}
+
+func (logger *Logger) WarningFormat(format string, values ...interface{}) {
+	logger.warning.Printf(format, values...)
+}
+
+func (logger *Logger) ErrorFormat(format string, values ...interface{}) {
+	logger.err.Printf(format, values...)
+}
