@@ -1,6 +1,8 @@
 package config
 
 import (
+	"os"
+
 	"github.com/brandaoplaster/gopportunities/schemas"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -8,7 +10,23 @@ import (
 
 func InitializeSQLite() (*gorm.DB, error) {
 	logger := GetLogger("sqlite")
-	db, erro := gorm.Open(sqlite.Open("./db/main.db"), &gorm.Config{})
+	fileDB := "./db/main.db"
+	_, erro := os.Stat(fileDB)
+
+	if os.IsNotExist(erro) {
+		logger.Info("Database file does not exist, creating it...")
+		erro = os.Mkdir("./db", os.ModePerm)
+		if erro != nil {
+			return nil, erro
+		}
+		file, erro := os.Create(fileDB)
+		if erro != nil {
+			return nil, erro
+		}
+		file.Close()
+	}
+
+	db, erro := gorm.Open(sqlite.Open(fileDB), &gorm.Config{})
 
 	if erro != nil {
 		logger.ErrorFormat("Error initializing SQLite: %v", erro)
